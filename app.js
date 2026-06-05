@@ -16,22 +16,15 @@ function renderHome(){
 
   $("cards").innerHTML=METHODS.map((m,i)=>`
     <div class="card" onclick="openPreview('${m.id}')">
-      <div class="idx">${String(i+1).padStart(2,"0")}</div>
+      <div class="go">→</div>
       <h4>${m.name}</h4>
       <div class="sub">${m.sub}</div>
       <div class="meta">
         <span class="tag">🫘 ${m.roast}</span>
         ${m.flavorTags.map(t=>`<span class="tag flav">${t}</span>`).join("")}
+        <span class="tag diff">難度<span class="dot ${m.difficulty>=1?'on':''}"></span><span class="dot ${m.difficulty>=2?'on':''}"></span><span class="dot ${m.difficulty>=3?'on':''}"></span></span>
       </div>
       <div class="flavor">${m.flavorText}</div>
-      <div class="foot">
-        <div class="dots">難度
-          <span class="dot ${m.difficulty>=1?'on':''}"></span>
-          <span class="dot ${m.difficulty>=2?'on':''}"></span>
-          <span class="dot ${m.difficulty>=3?'on':''}"></span>
-        </div>
-        <div class="go">查看步驟 →</div>
-      </div>
     </div>`).join("");
 }
 
