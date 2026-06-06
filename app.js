@@ -200,7 +200,7 @@ function paintBrew(){
     $("bw-stepnum").textContent=steps.length;
     $("bw-steplabel").textContent="沖煮完成";
     cd.classList.add("done");
-    cd.innerHTML=COFFEE_ICON;
+    if(!cd.querySelector(".cup"))cd.innerHTML=COFFEE_ICON;
   }else{
     $("bw-stepnum").textContent=idx+1;
     $("bw-steplabel").textContent=cur.label;
