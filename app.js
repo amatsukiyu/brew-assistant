@@ -3,12 +3,16 @@ const $=id=>document.getElementById(id);
 const fmt=s=>{s=Math.max(0,Math.round(s));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");};
 const valveText=v=>v==="open"?"開":v==="close"?"關":"—";
 const getMethod=id=>METHODS.find(m=>m.id===id);
+/* 把「15 g」拆成大數字＋小單位，讓數字跳出來、單位退後 */
+const numHTML=v=>{const i=v.search(/[^\d.~:-]/);const n=i>0?v.slice(0,i).trim():v;const u=i>0?v.slice(i).trim():"";return `<span class="pn">${n}</span>`+(u?`<span class="pu">${u}</span>`:"");};
+/* 咖啡豆圖示（streamline-plump:coffee-bean-solid）— 取代系統 emoji，跨平台一致 */
+const BEAN_ICON='<svg class="bean" width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M25.305 2.286C30.285 1.236 35.42 2.124 39.662 6l.027.025c-3.617.81-6.872 2.344-9.612 4.698c-3.516 3.021-6.086 7.309-7.53 12.903c-1.317 5.109-3.606 8.823-6.578 11.377c-2.765 2.376-6.207 3.821-10.21 4.392c-3.671-4.19-4.502-9.214-3.473-14.089c1.041-4.93 3.976-9.725 7.781-13.561a283 283 0 0 1 1.677-1.677c3.836-3.805 8.63-6.74 13.561-7.78"/><path fill="currentColor" d="m8.31 41.976l.028.025c4.243 3.875 9.378 4.764 14.357 3.713c4.931-1.04 9.725-3.975 13.561-7.78a295 295 0 0 0 1.677-1.678c3.806-3.836 6.74-8.63 7.781-13.56c1.03-4.876.199-9.9-3.473-14.09c-4.003.571-7.444 2.016-10.21 4.392c-2.972 2.554-5.26 6.268-6.578 11.377c-1.444 5.594-4.013 9.882-7.53 12.903c-2.74 2.354-5.994 3.888-9.612 4.698"/></svg>';
 
 /* ===================== HOME RENDER ===================== */
 function renderHome(){
   $("goals").innerHTML=GOALS.map(g=>`
     <button class="goal" onclick="openPreview('${g.mid}')">
-      <div class="groast ${g.light?'light':''}">${g.roast}</div>
+      <span class="roast">${BEAN_ICON}<span>${g.roast}</span></span>
       <div class="gt">${g.t}</div>
       <div class="gd">${g.d}</div>
       <div class="arrow">→</div>
@@ -16,15 +20,19 @@ function renderHome(){
 
   $("cards").innerHTML=METHODS.map((m,i)=>`
     <div class="card" onclick="openPreview('${m.id}')">
-      <div class="go">→</div>
-      <h4>${m.name}</h4>
-      <div class="sub">${m.sub}</div>
-      <div class="meta">
-        <span class="tag">🫘 ${m.roast}</span>
-        ${m.flavorTags.map(t=>`<span class="tag flav">${t}</span>`).join("")}
-        <span class="tag diff">難度<span class="dot ${m.difficulty>=1?'on':''}"></span><span class="dot ${m.difficulty>=2?'on':''}"></span><span class="dot ${m.difficulty>=3?'on':''}"></span></span>
+      <div class="chead">
+        <h4>${m.name}</h4>
+        <span class="roast">${BEAN_ICON}<span>${m.roast}</span></span>
       </div>
-      <div class="flavor">${m.flavorText}</div>
+      <div class="sub">${m.sub}</div>
+      <div class="hookrow">
+        <div class="flavor">${m.flavorText}</div>
+        <span class="go">→</span>
+      </div>
+      <div class="meta">
+        <span class="diffmeter">難度<span class="dot ${m.difficulty>=1?'on':''}"></span><span class="dot ${m.difficulty>=2?'on':''}"></span><span class="dot ${m.difficulty>=3?'on':''}"></span></span>
+        ${m.flavorTags.map(t=>`<span class="chip amber">${t}</span>`).join("")}
+      </div>
     </div>`).join("");
 }
 
@@ -36,12 +44,18 @@ function openPreview(id){
   $("pv-name").textContent=m.name;
   $("pv-desc").innerHTML=m.desc;
   $("pv-params").innerHTML=`
-    <div class="pcell"><div class="pl">粉量</div><div class="pv">${m.params.coffee}</div></div>
-    <div class="pcell"><div class="pl">水量</div><div class="pv">${m.params.water}</div></div>
-    <div class="pcell"><div class="pl">粉水比</div><div class="pv">${m.params.ratio}</div></div>
-    <div class="pcell"><div class="pl">水溫</div><div class="pv">${m.params.temp}</div></div>
-    <div class="pcell full"><div class="pl">研磨粗細</div><div class="pv sm">${m.params.grind}</div></div>
-    <div class="pcell full"><div class="pl">適合工具</div><div class="pv sm">${m.tool}</div></div>`;
+    <div class="pspec">
+      <div class="pgrid">
+        <div class="pcell"><div class="pl">粉量</div><div class="pv">${numHTML(m.params.coffee)}</div></div>
+        <div class="pcell"><div class="pl">水量</div><div class="pv">${numHTML(m.params.water)}</div></div>
+        <div class="pcell"><div class="pl">粉水比</div><div class="pv">${m.params.ratio.replace("約","").trim().split(":").map(x=>`<span class="pn">${x}</span>`).join('<span class="psep">:</span>')}</div></div>
+      </div>
+      <div class="pcond">
+        <div class="prow"><span class="pl">水溫</span><span class="ptv">${m.params.temp}</span></div>
+        <div class="prow"><span class="pl">研磨</span><span class="pmv">${m.params.grind}</span></div>
+        <div class="prow"><span class="pl">工具</span><span class="pmv">${m.tool}</span></div>
+      </div>
+    </div>`;
   $("pv-count").textContent=m.steps.length+" 個步驟";
   $("pv-steps").innerHTML=m.steps.map((s,i)=>`
     <div class="step ${s.valve==='close'?'closed':''}">
@@ -50,8 +64,8 @@ function openPreview(id){
         <div class="stop">
           <span class="slabel">${s.label}</span>
           <span class="stime">${fmt(s.t)}</span>
-          ${s.valve?`<span class="pill ${s.valve==='open'?'open':'close'}">閥門 ${valveText(s.valve)}</span>`:""}
-          ${s.temp&&s.temp!=='—'?`<span class="pill temp">${s.temp}</span>`:""}
+          ${s.valve?`<span class="chip status ${s.valve==='open'?'open':'close'}">閥門 ${valveText(s.valve)}</span>`:""}
+          ${s.temp&&s.temp!=='—'?`<span class="chip status amber">${s.temp}</span>`:""}
         </div>
         <div class="sact">${s.act}</div>
         ${s.note?`<div class="snote">${s.note}</div>`:""}
@@ -136,7 +150,7 @@ function updateListStates(idx,finished){
     row.classList.toggle("open",expanded.has(i));
     const ll=$("ll-"+i);
     const base=brewMethod.steps[i].label;
-    ll.innerHTML=base+(isNext?' <em class="badge nxt">下一步</em>':'');
+    ll.innerHTML=base+(isNext?' <em class="chip status amber">下一步</em>':'');
   });
 }
 
@@ -176,35 +190,37 @@ function paintBrew(){
   // progress
   $("bw-prog").style.width=Math.min(100,(elapsed/brewMethod.total)*100)+"%";
 
-  // NOW card — header + countdown
-  const cdwrap=$("bw-cdwrap");
-  cdwrap.classList.remove("urgent","done");
+  // NOW card — STEP 指示 + 倒數
+  const cd=$("bw-cd");
+  cd.classList.remove("urgent","done");
+  $("bw-steptot").textContent=" / "+steps.length;
   if(finished){
-    $("bw-stepno").textContent="沖煮完成";
-    cdwrap.classList.add("done");
-    cdwrap.innerHTML='<b>✓</b>';
+    $("bw-stepnum").textContent=steps.length;
+    $("bw-steplabel").textContent="沖煮完成";
+    cd.classList.add("done");
+    cd.textContent="✓";
   }else{
-    $("bw-stepno").textContent="現在 · STEP "+(idx+1)+" / "+steps.length;
+    $("bw-stepnum").textContent=idx+1;
+    $("bw-steplabel").textContent=cur.label;
     const remain=isLast?(brewMethod.total-elapsed):(steps[idx+1].t-elapsed);
-    cdwrap.innerHTML='<b>'+fmt(remain)+'</b>';
-    if(remain<=3)cdwrap.classList.add("urgent");
+    cd.textContent=fmt(remain);
+    if(remain<=3)cd.classList.add("urgent");
   }
 
-  // NOW card — body
-  $("bw-steplabel").textContent=cur.label;
+  // NOW card — 指示與註記
   $("bw-act").innerHTML=cur.act;
   if(cur.note){$("bw-note").style.display="block";$("bw-note").innerHTML=cur.note;}
   else{$("bw-note").style.display="none";}
 
-  // NOW card — chips (閥門 / 水溫 / 本次注水量)
-  const valveEl=$("bw-valve");
-  valveEl.classList.remove("open","close");
-  if(cur.valve)valveEl.classList.add(cur.valve);
-  $("bw-valveval").textContent=valveText(cur.valve);
+  // NOW card — 資訊塊（閥門 / 水溫 / 累計，附本次增量）
+  const vv=$("bw-valveval");
+  vv.classList.remove("open","close");
+  if(cur.valve)vv.classList.add(cur.valve);
+  vv.textContent=valveText(cur.valve);
   $("bw-temp").textContent=cur.temp||"—";
   const pour=pourOf(idx);
-  $("bw-water").innerHTML=pour>0?('+'+pour+'<small>g</small>'):"—";
-  $("bw-watersub").textContent="累計 "+cur.water+"g";
+  $("bw-water").textContent=cur.water+"g";
+  $("bw-watersub").textContent=pour>0?("+"+pour+"g"):"—";
 
   // smart list + cue only on step change
   if(idx!==lastStepIdx){
