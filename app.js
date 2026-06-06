@@ -48,7 +48,7 @@ function openPreview(id){
       <div class="pgrid">
         <div class="pcell"><div class="pl">粉量</div><div class="pv">${numHTML(m.params.coffee)}</div></div>
         <div class="pcell"><div class="pl">水量</div><div class="pv">${numHTML(m.params.water)}</div></div>
-        <div class="pcell"><div class="pl">粉水比</div><div class="pv">${numHTML(m.params.ratio.replace("約","").trim())}</div></div>
+        <div class="pcell"><div class="pl">粉水比</div><div class="pv">${m.params.ratio.replace("約","").trim().split(":").map(x=>`<span class="pn">${x}</span>`).join('<span class="psep">:</span>')}</div></div>
       </div>
       <div class="pcond">
         <div class="prow"><span class="pl">水溫</span><span class="ptv">${m.params.temp}</span></div>
@@ -190,35 +190,37 @@ function paintBrew(){
   // progress
   $("bw-prog").style.width=Math.min(100,(elapsed/brewMethod.total)*100)+"%";
 
-  // NOW card — header + countdown
-  const cdwrap=$("bw-cdwrap");
-  cdwrap.classList.remove("urgent","done");
+  // NOW card — STEP 指示 + 倒數
+  const cd=$("bw-cd");
+  cd.classList.remove("urgent","done");
+  $("bw-steptot").textContent=" / "+steps.length;
   if(finished){
-    $("bw-stepno").textContent="沖煮完成";
-    cdwrap.classList.add("done");
-    cdwrap.innerHTML='<b>✓</b>';
+    $("bw-stepnum").textContent=steps.length;
+    $("bw-steplabel").textContent="沖煮完成";
+    cd.classList.add("done");
+    cd.textContent="✓";
   }else{
-    $("bw-stepno").textContent="現在 · STEP "+(idx+1)+" / "+steps.length;
+    $("bw-stepnum").textContent=idx+1;
+    $("bw-steplabel").textContent=cur.label;
     const remain=isLast?(brewMethod.total-elapsed):(steps[idx+1].t-elapsed);
-    cdwrap.innerHTML='<b>'+fmt(remain)+'</b>';
-    if(remain<=3)cdwrap.classList.add("urgent");
+    cd.textContent=fmt(remain);
+    if(remain<=3)cd.classList.add("urgent");
   }
 
-  // NOW card — body
-  $("bw-steplabel").textContent=cur.label;
+  // NOW card — 指示與註記
   $("bw-act").innerHTML=cur.act;
   if(cur.note){$("bw-note").style.display="block";$("bw-note").innerHTML=cur.note;}
   else{$("bw-note").style.display="none";}
 
-  // NOW card — chips (閥門 / 水溫 / 本次注水量)
-  const valveEl=$("bw-valve");
-  valveEl.classList.remove("open","close");
-  if(cur.valve)valveEl.classList.add(cur.valve);
-  $("bw-valveval").textContent=valveText(cur.valve);
+  // NOW card — 資訊塊（閥門 / 水溫 / 累計，附本次增量）
+  const vv=$("bw-valveval");
+  vv.classList.remove("open","close");
+  if(cur.valve)vv.classList.add(cur.valve);
+  vv.textContent=valveText(cur.valve);
   $("bw-temp").textContent=cur.temp||"—";
   const pour=pourOf(idx);
-  $("bw-water").innerHTML=pour>0?('+'+pour+'<small>g</small>'):"—";
-  $("bw-watersub").textContent="累計 "+cur.water+"g";
+  $("bw-water").textContent=cur.water+"g";
+  $("bw-watersub").textContent=pour>0?("+"+pour+"g"):"—";
 
   // smart list + cue only on step change
   if(idx!==lastStepIdx){

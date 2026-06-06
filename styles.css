@@ -24,6 +24,7 @@
     --t-body:16px;
     --t-sm:14px;
     --t-label:12px;
+    --t-timer:56px; /* 例外：計時頁倒數，刻意破格當主角 */
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{height:100%}
@@ -119,6 +120,7 @@
   .pv{margin-top:5px;line-height:1}
   .pn{font-family:var(--num);font-weight:600;font-size:var(--t-title);color:var(--ink)}
   .pu{font-size:var(--t-sm);color:var(--ink-soft);margin-left:2px}
+  .psep{font-size:var(--t-sm);color:var(--ink-soft);margin:0 2px}
   .pcond{border-top:1px solid var(--line);margin-top:14px;padding-top:13px;display:flex;flex-direction:column;gap:10px}
   .prow{display:flex;gap:14px;align-items:baseline}
   .prow .pl{flex:0 0 52px}
@@ -155,23 +157,25 @@
   .now{margin-top:18px;border-radius:24px;padding:20px 18px 18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.25s}
   .now.flash{animation:flash .9s ease}
   @keyframes flash{0%{background:#fbe9cf;box-shadow:0 0 0 3px var(--crema),var(--shadow)}100%{background:var(--card)}}
-  .now .nhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-  .now .stepno{display:block;font-family:var(--sans);font-weight:700;color:var(--amber);font-size:var(--t-label);letter-spacing:1px;margin-bottom:6px}
-  .now .ncd{white-space:nowrap}
-  .now .ncd b{font-family:var(--serif-en);font-weight:600;font-size:var(--t-display);color:var(--amber-deep);font-variant-numeric:tabular-nums;line-height:1}
-  .now .ncd.urgent b{color:#c0392b}
-  .now .ncd.done b{color:#4d6b3b}
-  .now .nname{font-family:var(--serif-cn);font-weight:800;font-size:var(--t-title);line-height:1.15;margin:0}
-  .nchips{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px;align-items:stretch}
-  .nchip{text-align:center;border-radius:14px;padding:11px 6px;border:1px solid var(--line);background:#f6ecda;display:flex;flex-direction:column;justify-content:center}
-  .nchip span{display:block;font-size:var(--t-label);color:var(--ink-soft);letter-spacing:.5px}
-  .nchip b{display:block;font-family:var(--num);font-weight:600;font-size:var(--t-head);margin-top:5px;line-height:1}
-  .nchip b small{font-size:var(--t-label);font-weight:500}
-  .nchip .wsub{display:block;font-style:normal;font-size:var(--t-label);font-weight:500;color:var(--ink-soft);margin-top:5px}
-  .nchip.valve.open{background:#e3efd8;border-color:#c5dcb3}
-  .nchip.valve.open b{color:var(--green-deep)}
-  .nchip.valve.close{background:#dcc5a0;border-color:#c8ad80}
-  .nchip.valve.close b{color:var(--brown)}
+  /* 現在卡：左欄（STEP／步驟名／倒數）＋右欄底色資訊塊（閥門／水溫／累計） */
+  .now .nx-top{display:flex;align-items:stretch;gap:16px}
+  .now .nx-left{flex:1.05;display:flex;flex-direction:column}
+  .nx-step{font-family:var(--serif-en);font-weight:600;font-size:var(--t-label);letter-spacing:1px;color:var(--amber)}
+  .nx-step i{font-style:normal;color:#d3c1a0}
+  .nx-name{font-family:var(--serif-cn);font-weight:800;font-size:var(--t-head);line-height:1.1;margin:5px 0 0}
+  .nx-cd{font-family:var(--serif-en);font-weight:600;font-size:var(--t-timer);line-height:.92;color:var(--amber-deep);font-variant-numeric:tabular-nums;margin-top:28px}
+  .nx-cd.urgent{color:#c0392b}
+  .nx-cd.done{color:var(--green-deep)}
+  .nx-block{flex:1;background:#f6ecda;border:1px solid var(--line);border-radius:14px;padding:4px 14px;display:flex;flex-direction:column;justify-content:center}
+  .nx-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:11px 0}
+  .nx-row+.nx-row{border-top:1px solid var(--line)}
+  .nx-row>span:first-child{font-size:var(--t-label);color:var(--ink-soft)}
+  .nx-v{font-family:var(--num);font-weight:600;font-size:var(--t-head);line-height:1}
+  .nx-v.open{color:var(--green-deep);font-weight:700}
+  .nx-v.close{color:var(--brown);font-weight:700}
+  .nx-w{text-align:right;line-height:1.1}
+  .nx-w b{font-family:var(--num);font-weight:700;font-size:var(--t-head)}
+  .nx-w i{display:block;font-style:normal;font-family:var(--num);font-weight:600;font-size:var(--t-label);color:var(--ink-soft);margin-top:3px}
   .now .nact{font-size:var(--t-body);line-height:1.6;margin-top:15px}
   .now .nact b{color:var(--amber-deep);font-weight:700}
   .now .nnote{font-size:var(--t-label);color:var(--ink-soft);line-height:1.5;margin-top:10px;padding-left:10px;border-left:2px solid var(--line)}

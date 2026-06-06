@@ -68,15 +68,17 @@
     <div class="elapsedline">已經過 <b id="bw-clock">0:00</b><i id="bw-total"></i></div>
 
     <div class="now" id="bw-now">
-      <div class="stepno" id="bw-stepno">現在</div>
-      <div class="nhead">
-        <h3 class="nname" id="bw-steplabel"></h3>
-        <span class="ncd" id="bw-cdwrap"><b id="bw-cd">0:00</b></span>
-      </div>
-      <div class="nchips">
-        <div class="nchip valve" id="bw-valve"><span>閥門</span><b id="bw-valveval">—</b></div>
-        <div class="nchip"><span>水溫</span><b id="bw-temp">—</b></div>
-        <div class="nchip"><span>本次注水量</span><b id="bw-water">—</b><i class="wsub" id="bw-watersub"></i></div>
+      <div class="nx-top">
+        <div class="nx-left">
+          <span class="nx-step">STEP <b id="bw-stepnum">1</b><i id="bw-steptot"> / 1</i></span>
+          <h3 class="nx-name" id="bw-steplabel"></h3>
+          <b class="nx-cd" id="bw-cd">0:00</b>
+        </div>
+        <div class="nx-block">
+          <div class="nx-row"><span>閥門</span><b class="nx-v" id="bw-valveval">—</b></div>
+          <div class="nx-row"><span>水溫</span><b class="nx-v" id="bw-temp">—</b></div>
+          <div class="nx-row"><span>累計</span><span class="nx-w"><b id="bw-water">—</b><i id="bw-watersub"></i></span></div>
+        </div>
       </div>
       <div class="nact" id="bw-act"></div>
       <div class="nnote" id="bw-note"></div>
