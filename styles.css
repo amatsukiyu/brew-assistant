@@ -166,6 +166,7 @@
   .nx-cd{font-family:var(--serif-en);font-weight:600;font-size:var(--t-timer);line-height:.92;color:var(--amber-deep);font-variant-numeric:tabular-nums;margin-top:28px}
   .nx-cd.urgent{color:#c0392b}
   .nx-cd.done{color:var(--green-deep)}
+  .nx-cd .cup{display:block;width:64px;height:64px;margin-top:-2px}
   .nx-block{flex:1;background:#f6ecda;border:1px solid var(--line);border-radius:14px;padding:4px 14px;display:flex;flex-direction:column;justify-content:center}
   .nx-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:11px 0}
   .nx-row+.nx-row{border-top:1px solid var(--line)}

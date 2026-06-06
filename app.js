@@ -7,6 +7,8 @@ const getMethod=id=>METHODS.find(m=>m.id===id);
 const numHTML=v=>{const i=v.search(/[^\d.~:-]/);const n=i>0?v.slice(0,i).trim():v;const u=i>0?v.slice(i).trim():"";return `<span class="pn">${n}</span>`+(u?`<span class="pu">${u}</span>`:"");};
 /* 咖啡豆圖示（streamline-plump:coffee-bean-solid）— 取代系統 emoji，跨平台一致 */
 const BEAN_ICON='<svg class="bean" width="14" height="14" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M25.305 2.286C30.285 1.236 35.42 2.124 39.662 6l.027.025c-3.617.81-6.872 2.344-9.612 4.698c-3.516 3.021-6.086 7.309-7.53 12.903c-1.317 5.109-3.606 8.823-6.578 11.377c-2.765 2.376-6.207 3.821-10.21 4.392c-3.671-4.19-4.502-9.214-3.473-14.089c1.041-4.93 3.976-9.725 7.781-13.561a283 283 0 0 1 1.677-1.677c3.836-3.805 8.63-6.74 13.561-7.78"/><path fill="currentColor" d="m8.31 41.976l.028.025c4.243 3.875 9.378 4.764 14.357 3.713c4.931-1.04 9.725-3.975 13.561-7.78a295 295 0 0 0 1.677-1.678c3.806-3.836 6.74-8.63 7.781-13.56c1.03-4.876.199-9.9-3.473-14.09c-4.003.571-7.444 2.016-10.21 4.392c-2.972 2.554-5.26 6.268-6.578 11.377c-1.444 5.594-4.013 9.882-7.53 12.903c-2.74 2.354-5.994 3.888-9.612 4.698"/></svg>';
+/* 完成圖示（material-symbols:coffee-rounded）— 沖煮完成的主視覺 */
+const COFFEE_ICON='<svg class="cup" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 18q-2.925 0-4.962-2.037T4 11V5q0-.825.588-1.412T6 3h12.5q1.45 0 2.475 1.025T22 6.5t-1.025 2.475T18.5 10H18v1q0 2.925-2.037 4.963T11 18M6 8h10V5H6zm12 0h.5q.625 0 1.063-.437T20 6.5t-.437-1.062T18.5 5H18zM5 21q-.425 0-.712-.288T4 20t.288-.712T5 19h14q.425 0 .713.288T20 20t-.288.713T19 21z"/></svg>';
 
 /* ===================== HOME RENDER ===================== */
 function renderHome(){
@@ -198,7 +200,7 @@ function paintBrew(){
     $("bw-stepnum").textContent=steps.length;
     $("bw-steplabel").textContent="沖煮完成";
     cd.classList.add("done");
-    cd.textContent="✓";
+    cd.innerHTML=COFFEE_ICON;
   }else{
     $("bw-stepnum").textContent=idx+1;
     $("bw-steplabel").textContent=cur.label;
