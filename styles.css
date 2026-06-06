@@ -165,7 +165,7 @@
   .nx-cd{font-family:var(--serif-en);font-weight:600;font-size:var(--t-timer);line-height:.92;color:var(--amber-deep);font-variant-numeric:tabular-nums;margin-top:28px}
   .nx-cd.urgent{color:#c0392b}
   .nx-cd.done{color:var(--green-deep)}
-  .nx-cd .cup{display:block;width:64px;height:64px;margin-top:-2px;animation:cupIn .5s ease-in both}
+  .nx-cd .cup{display:block;width:64px;height:64px;margin-top:-2px;animation:cupIn .5s ease-out both}
   @keyframes cupIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
   @media (prefers-reduced-motion:reduce){.nx-cd .cup{animation:none}}
   .nx-block{flex:1;background:#f6ecda;border:1px solid var(--line);border-radius:14px;padding:4px 14px;display:flex;flex-direction:column;justify-content:center}
