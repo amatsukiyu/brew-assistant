@@ -146,12 +146,11 @@
   .startbtn svg{width:18px;height:18px}
 
   /* ---------- Brew ---------- */
-  .brewtop{text-align:center;margin:2px 0 12px}
-  .brewtop .bname{font-family:var(--sans);font-weight:500;font-size:var(--t-sm);color:var(--ink-soft)}
-  .elapsedline{text-align:center;font-size:var(--t-label);color:var(--ink-soft);letter-spacing:1px;margin:10px 0 0}
-  .elapsedline b{font-family:var(--serif-en);font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
-  .elapsedline i{font-style:normal}
-  .progress{height:6px;border-radius:999px;background:#e3d3ba;overflow:hidden;margin:2px 2px 0}
+  .brewtop{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:2px 2px 8px}
+  .brewtop .bname{flex:1;min-width:0;font-family:var(--sans);font-weight:500;font-size:var(--t-sm);color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brewtop .btime{flex:0 0 auto;font-size:var(--t-label);color:var(--ink-soft);letter-spacing:.5px;font-variant-numeric:tabular-nums}
+  .brewtop .btime b{font-family:var(--serif-en);font-weight:600;color:var(--ink)}
+  .progress{height:6px;border-radius:999px;background:#e3d3ba;overflow:hidden;margin:0 2px}
   .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--crema),var(--amber));transition:width .25s linear}
 
   .now{margin-top:18px;border-radius:24px;padding:20px 18px 18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.25s}

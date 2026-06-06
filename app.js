@@ -93,7 +93,7 @@ function startBrew(){
   elapsed=0;running=false;lastStepIdx=-1;
   if(timer){clearInterval(timer);timer=null;}
   $("bw-name").textContent=brewMethod.name+" · "+brewMethod.sub;
-  $("bw-total").textContent=" / 總時間約 "+fmt(brewMethod.total);
+  $("bw-total").textContent=fmt(brewMethod.total);
   $("bw-togglelabel").textContent="開始計時";
   $("bw-toggle").querySelector("svg").innerHTML='<polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none"/>';
   expanded=new Set();
