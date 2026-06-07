@@ -189,7 +189,7 @@
   .nx-w i{display:block;font-style:normal;font-family:var(--sans);font-weight:400;font-size:var(--t-label);color:var(--ink-soft);margin-top:3px}
   .now .nact{font-size:var(--t-body);line-height:1.6;margin-top:15px}
   .now .nact b{color:var(--amber-deep);font-weight:700}
-  .now .nnote{font-size:var(--t-label);color:var(--ink-soft);line-height:1.5;margin-top:10px;padding-left:10px;border-left:1px solid var(--line)}
+  .now .nnote{font-size:var(--t-sm);color:var(--ink-soft);line-height:1.5;margin-top:10px;padding-left:10px;border-left:1px solid var(--line)}
 
   .list{margin-top:22px}
   .list h4{font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);margin:0 0 12px}
