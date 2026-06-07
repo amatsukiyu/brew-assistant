@@ -21,7 +21,7 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand">
-      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 18q-2.925 0-4.962-2.037T4 11V5q0-.825.588-1.412T6 3h12.5q1.45 0 2.475 1.025T22 6.5t-1.025 2.475T18.5 10H18v1q0 2.925-2.037 4.963T11 18M6 8h10V5H6zm12 0h.5q.625 0 1.063-.437T20 6.5t-.437-1.062T18.5 5H18zM5 21q-.425 0-.712-.288T4 20t.288-.712T5 19h14q.425 0 .713.288T20 20t-.288.713T19 21z"/></svg></div>
+      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="markGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bf6b32"/><stop offset="0.6" stop-color="#bf6b32"/><stop offset="1" stop-color="#8D5B3D"/></linearGradient></defs><path fill="url(#markGrad)" d="M11 18q-2.925 0-4.962-2.037T4 11V5q0-.825.588-1.412T6 3h12.5q1.45 0 2.475 1.025T22 6.5t-1.025 2.475T18.5 10H18v1q0 2.925-2.037 4.963T11 18M6 8h10V5H6zm12 0h.5q.625 0 1.063-.437T20 6.5t-.437-1.062T18.5 5H18zM5 21q-.425 0-.712-.288T4 20t.288-.712T5 19h14q.425 0 .713.288T20 20t-.288.713T19 21z"/></svg></div>
       <h1>Brew Studio</h1>
     </div>
     <button class="backbtn" id="backBtn" style="display:none" onclick="goHome()">
@@ -30,7 +30,7 @@
   </div>
 
   <!-- ============ HOME ============ -->
-  <section class="view active" id="view-home">
+  <section class="view active stagger" id="view-home">
     <div class="hero">
       <h2>今天，<br>想喝<b>怎樣的咖啡？</b></h2>
       <p>依手上的豆子與想要的風味，挑一個沖煮法。預覽完整步驟後，跟著計時器一步步沖。</p>
@@ -46,7 +46,7 @@
   </section>
 
   <!-- ============ PREVIEW ============ -->
-  <section class="view" id="view-preview">
+  <section class="view stagger" id="view-preview">
     <div class="ph">
       <div class="sub" id="pv-sub"></div>
       <h2 id="pv-name"></h2>
@@ -55,6 +55,7 @@
     <div class="params" id="pv-params"></div>
     <div class="section-h"><h3>沖煮步驟</h3><span class="hint" id="pv-count"></span></div>
     <div class="timeline" id="pv-steps"></div>
+    <div class="cta-scrim" aria-hidden="true"></div>
     <button class="startbtn" onclick="startBrew()">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.275 19q.3-.025.513-.238T13 18.25q0-.35-.225-.562T12.2 17.5q-1.025.075-2.175-.562t-1.45-2.313q-.05-.275-.262-.45T7.825 14q-.35 0-.575.263t-.15.612q.425 2.275 2 3.25t3.175.875m-5.987.65Q4 17.3 4 13.8q0-2.5 1.988-5.437T12 2q4.025 3.425 6.013 6.363T20 13.8q0 3.5-2.287 5.85T12 22t-5.712-2.35"/></svg>
       沖煮
@@ -62,7 +63,7 @@
   </section>
 
   <!-- ============ BREW ============ -->
-  <section class="view" id="view-brew">
+  <section class="view stagger" id="view-brew">
     <div class="brewtop">
       <div class="bname" id="bw-name"></div>
       <div class="btime"><b id="bw-clock">0:00</b> / <span id="bw-total"></span></div>
@@ -92,6 +93,7 @@
     </div>
     <div style="height:80px"></div>
 
+    <div class="cta-scrim" aria-hidden="true"></div>
     <div class="controls">
       <button class="ctrl ghost" id="bw-reset" onclick="resetBrew()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>重來

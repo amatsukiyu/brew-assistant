@@ -129,7 +129,7 @@ function buildList(){
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
         <svg class="check2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
-      <div class="ldetail">${detailHTML(i)}</div>
+      <div class="ldetail"><div class="ldinner"><div class="ldpad">${detailHTML(i)}</div></div></div>
     </div>`).join("");
 }
 
@@ -201,7 +201,7 @@ function paintBrew(){
   const finished=elapsed>=brewMethod.total;
 
   // progress
-  $("bw-prog").style.width=Math.min(100,(elapsed/brewMethod.total)*100)+"%";
+  $("bw-prog").style.transform="scaleX("+Math.min(1,elapsed/brewMethod.total)+")";
 
   // NOW card — STEP 指示 + 倒數
   const cd=$("bw-cd");
@@ -241,16 +241,17 @@ function paintBrew(){
     const first=lastStepIdx;
     lastStepIdx=idx;
     updateListStates(idx,finished);
-    if(running&&(idx>0||elapsed>0.3)&&first!==-1){flashCue();beep();}
+    if(running&&(idx>0||elapsed>0.3)&&first!==-1){swapCue();beep();}
   }else if(finished&&!$("bw-list").dataset.done){
     $("bw-list").dataset.done="1";
     updateListStates(idx,true);
   }
 }
 
-function flashCue(){
+// 換步驟：重新觸發卡內元件由上而下依序淡入（只影響 .now 的子元素，不動 #bw-now 自身的進場動畫）
+function swapCue(){
   const n=$("bw-now");
-  n.classList.remove("flash");void n.offsetWidth;n.classList.add("flash");
+  n.classList.remove("swap");void n.offsetWidth;n.classList.add("swap");
 }
 let actx=null;
 function beep(){
