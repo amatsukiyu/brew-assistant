@@ -103,8 +103,35 @@ function startBrew(){
   $("bw-list").removeAttribute("data-done");
   paintBrew();
   showView("brew");
+  lockNowHeight();
   $("backBtn").style.display="flex";
 }
+
+// 量出此沖煮法所有步驟中最高的「現在卡」，鎖成固定 min-height
+// → 換步驟時卡片高度不變、下方清單不再上下跳動（消除位移與重繪閃爍）
+function lockNowHeight(){
+  if(!brewMethod)return;
+  const now=$("bw-now"),act=$("bw-act"),note=$("bw-note");
+  const sA=act.innerHTML,sN=note.innerHTML,sD=note.style.display;
+  now.style.minHeight="0px";
+  void now.offsetHeight; // 強制重排，確保量到的是自然高度（不含先前的 min-height）
+  let max=0;
+  for(const s of brewMethod.steps){
+    act.innerHTML=s.act;
+    if(s.note){note.style.display="block";note.innerHTML=s.note;}
+    else{note.style.display="none";}
+    void now.offsetHeight;
+    const h=now.getBoundingClientRect().height;
+    if(h>max)max=h;
+  }
+  // 還原當前步驟內容（同步進行，不會產生中間畫面）
+  act.innerHTML=sA;note.innerHTML=sN;note.style.display=sD;
+  // +8 容納完成狀態的咖啡杯較高一些；上限保險，避免異常環境量測失控
+  now.style.minHeight=Math.min(Math.ceil(max)+8,460)+"px";
+}
+window.addEventListener("resize",()=>{if(brewMethod&&$("view-brew").classList.contains("active"))lockNowHeight();});
+// 字型載入後重算（避免以後備字型量到偏小的高度）
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(brewMethod&&$("view-brew").classList.contains("active"))lockNowHeight();});
 
 function pourOf(i){const s=brewMethod.steps;return s[i].water-(i>0?s[i-1].water:0);}
 
