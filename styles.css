@@ -70,7 +70,7 @@
   #goals + .section-h{margin-top:48px}
 
   .goals{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-  .goal{position:relative;text-align:left;border:1px solid var(--line);background:var(--card);border-radius:18px;padding:15px 14px 14px;cursor:pointer;overflow:hidden;transition:.18s;box-shadow:0 2px 0 rgba(255,255,255,.4) inset}
+  .goal{position:relative;text-align:left;font-family:var(--sans);border:1px solid var(--line);background:var(--card);border-radius:18px;padding:15px 14px 14px;cursor:pointer;overflow:hidden;transition:.18s;box-shadow:0 2px 0 rgba(255,255,255,.4) inset}
   .goal:hover{box-shadow:0 2px 0 rgba(255,255,255,.4) inset,var(--shadow)}
   .goal:active{transform:translateY(2px) scale(.99)}
   .goal .gt{font-family:var(--serif-cn);font-weight:700;font-size:var(--t-head);color:var(--ink);margin:10px 0 4px}
