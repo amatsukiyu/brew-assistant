@@ -244,8 +244,8 @@
   /* 一塊塊元件帶微幅上浮依序進場 */
   @keyframes riseUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   .stagger>*{opacity:0;animation:riseUp .55s var(--ease) forwards}
-  /* 固定的 CTA／漸隱襯底不參與編排（避免位移影響固定定位）：直接顯示 */
-  .stagger>.startbtn,.stagger>.cta-scrim{opacity:1;transform:none;animation:none}
+  /* 固定的 CTA／漸隱襯底不參與編排（保留各自的 translateX 置中，不可覆寫 transform）：直接顯示 */
+  .stagger>.startbtn,.stagger>.controls,.stagger>.cta-scrim{opacity:1;animation:none}
   .stagger>*:nth-child(1){animation-delay:.04s}
   .stagger>*:nth-child(2){animation-delay:.1s}
   .stagger>*:nth-child(3){animation-delay:.16s}
