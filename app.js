@@ -179,7 +179,7 @@ function finishBrew(){
 function playTimer(){
   running=true;
   $("bw-togglelabel").textContent="暫停";
-  $("bw-toggle").querySelector("svg").innerHTML='<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+  $("bw-toggle").querySelector("svg").innerHTML='<rect x="6" y="5" width="4.5" height="14" rx="1.2" fill="currentColor" stroke="none"/><rect x="13.5" y="5" width="4.5" height="14" rx="1.2" fill="currentColor" stroke="none"/>';
   const t0=Date.now()-elapsed*1000;
   timer=setInterval(()=>{elapsed=(Date.now()-t0)/1000;paintBrew();},100);
 }
