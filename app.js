@@ -129,7 +129,7 @@ function buildList(){
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
         <svg class="check2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
-      <div class="ldetail">${detailHTML(i)}</div>
+      <div class="ldetail"><div class="ldinner"><div class="ldpad">${detailHTML(i)}</div></div></div>
     </div>`).join("");
 }
 
@@ -201,7 +201,7 @@ function paintBrew(){
   const finished=elapsed>=brewMethod.total;
 
   // progress
-  $("bw-prog").style.width=Math.min(100,(elapsed/brewMethod.total)*100)+"%";
+  $("bw-prog").style.transform="scaleX("+Math.min(1,elapsed/brewMethod.total)+")";
 
   // NOW card — STEP 指示 + 倒數
   const cd=$("bw-cd");

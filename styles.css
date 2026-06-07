@@ -12,6 +12,7 @@
     --green-deep:#4d6b3b;
     --brown:#74501f;
     --shadow:0 18px 40px -22px rgba(53,32,14,.55);
+    --ease:cubic-bezier(.22,1,.36,1); /* ease-out-quint：自然減速、無彈跳 */
     /* fonts: EN/numerals · CN headings · CN body · mixed-numeric */
     --serif-en:'Fraunces',serif;
     --serif-cn:'Shippori Mincho B1',serif;
@@ -57,7 +58,7 @@
   .brand .mark{width:36px;height:36px;color:var(--amber);display:flex;align-items:center;justify-content:center}
   .brand .mark svg{width:36px;height:36px;display:block}
   .brand h1{font-family:var(--serif-en);font-weight:700;font-size:var(--t-head);letter-spacing:.3px;line-height:1}
-  .backbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--sans);font-size:var(--t-sm);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.2s}
+  .backbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--sans);font-size:var(--t-sm);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.2s var(--ease)}
   .backbtn:active{transform:scale(.96)}
   .backbtn svg{width:14px;height:14px}
 
@@ -75,7 +76,7 @@
   #goals + .section-h{margin-top:48px}
 
   .goals{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-  .goal{position:relative;text-align:left;font-family:var(--sans);border:1px solid var(--line);background:var(--card);border-radius:18px;padding:15px 14px 14px;cursor:pointer;overflow:hidden;transition:.18s;box-shadow:0 2px 0 rgba(255,255,255,.4) inset}
+  .goal{position:relative;text-align:left;font-family:var(--sans);border:1px solid var(--line);background:var(--card);border-radius:18px;padding:15px 14px 14px;cursor:pointer;overflow:hidden;transition:.18s var(--ease);box-shadow:0 2px 0 rgba(255,255,255,.4) inset}
   .goal:hover{box-shadow:0 2px 0 rgba(255,255,255,.4) inset,var(--shadow)}
   .goal:active{transform:translateY(2px) scale(.99)}
   .goal .gt{font-family:var(--serif-cn);font-weight:700;font-size:var(--t-head);color:var(--ink);margin:10px 0 4px}
@@ -83,7 +84,7 @@
   .goal .arrow{position:absolute;right:13px;bottom:13px;color:var(--amber);font-size:var(--t-body);opacity:.7}
 
   .cards{display:flex;flex-direction:column;gap:14px;margin-top:2px}
-  .card{position:relative;border:1px solid var(--line);background:var(--card);border-radius:22px;padding:18px 18px 16px;cursor:pointer;transition:.18s;overflow:hidden}
+  .card{position:relative;border:1px solid var(--line);background:var(--card);border-radius:22px;padding:18px 18px 16px;cursor:pointer;transition:.18s var(--ease);overflow:hidden}
   .card:hover{box-shadow:var(--shadow)}
   .card:active{transform:scale(.985)}
   .card .ribbon{position:absolute;top:0;right:0;width:84px;height:84px;overflow:hidden}
@@ -147,7 +148,7 @@
 
   .startbtn{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;width:min(480px,calc(100% - 40px));z-index:30;
     background:linear-gradient(180deg,#5c7b46,#385029);color:#fff6e9;border:none;border-radius:18px;padding:17px;font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);letter-spacing:2px;cursor:pointer;
-    box-shadow:0 14px 30px -10px rgba(45,75,35,.55);display:flex;align-items:center;justify-content:center;gap:9px;transition:.15s}
+    box-shadow:0 14px 30px -10px rgba(45,75,35,.55);display:flex;align-items:center;justify-content:center;gap:9px;transition:.15s var(--ease)}
   .startbtn:active{transform:translateX(-50%) translateY(2px) scale(.99)}
   .startbtn svg{width:18px;height:18px}
 
@@ -157,9 +158,9 @@
   .brewtop .btime{flex:0 0 auto;font-size:var(--t-label);color:var(--ink-soft);letter-spacing:.5px;font-variant-numeric:tabular-nums}
   .brewtop .btime b{font-family:var(--sans);font-weight:700;color:var(--ink)}
   .progress{height:6px;border-radius:999px;background:#e3d3ba;overflow:hidden;margin:0 2px}
-  .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--crema),var(--amber));transition:width .25s linear}
+  .progress > i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--crema),var(--amber));transition:transform .25s linear}
 
-  .now{margin-top:18px;border-radius:24px;padding:20px 18px 18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.25s}
+  .now{margin-top:18px;border-radius:24px;padding:20px 18px 18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.25s var(--ease)}
   .now.flash{animation:flash .9s ease}
   @keyframes flash{0%{background:#fbe9cf;box-shadow:0 0 0 3px var(--crema),var(--shadow)}100%{background:var(--card)}}
   /* 現在卡：左欄（STEP／步驟名／倒數）＋右欄底色資訊塊（閥門／水溫／累計） */
@@ -198,7 +199,7 @@
 
   .list{margin-top:22px}
   .list h4{font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);margin:0 0 12px}
-  .lrow{border:1px solid var(--line);background:var(--card);border-radius:14px;margin-bottom:8px;overflow:hidden;transition:border-color .2s,opacity .2s,background .2s}
+  .lrow{border:1px solid var(--line);background:var(--card);border-radius:14px;margin-bottom:8px;overflow:hidden;transition:border-color .2s var(--ease),opacity .2s var(--ease),background .2s var(--ease)}
   .lrow.passed{opacity:.5}
   .lrow.active{border-color:var(--amber);background:#f7ead4;box-shadow:0 6px 16px -10px rgba(120,55,10,.45)}
   .lrow.next{border-color:#d3c1a0;background:#faf3e7}
@@ -209,15 +210,17 @@
   .vdot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
   .vdot.open{background:var(--green)}
   .vdot.close{background:#a06a37}
-  .chev{width:15px;height:15px;color:var(--ink-soft);transition:transform .25s;flex:0 0 15px}
+  .chev{width:15px;height:15px;color:var(--ink-soft);transition:transform .25s var(--ease);flex:0 0 15px}
   .lrow.open .chev{transform:rotate(90deg)}
   .lrow.passed .chev{display:none}
   .check2{width:15px;height:15px;color:var(--green);flex:0 0 15px;display:none}
   .lrow.passed .check2{display:block;animation:checkIn .45s cubic-bezier(.2,.8,.2,1) both}
   @keyframes checkIn{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
   @media (prefers-reduced-motion:reduce){.lrow.passed .check2{animation:none}}
-  .ldetail{max-height:0;opacity:0;overflow:hidden;transition:max-height .25s,opacity .25s,padding .25s;padding:0 14px;font-size:var(--t-label);color:var(--ink-soft);line-height:1.7}
-  .lrow.open .ldetail{max-height:90px;opacity:1;padding:2px 14px 13px 65px}
+  .ldetail{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .28s var(--ease),opacity .2s var(--ease)}
+  .ldetail>.ldinner{min-height:0;overflow:hidden}
+  .ldpad{padding:2px 14px 13px 65px;font-size:var(--t-label);color:var(--ink-soft);line-height:1.7}
+  .lrow.open .ldetail{grid-template-rows:1fr;opacity:1}
   .ldetail b{color:var(--amber-deep);font-weight:700}
   .ldetail .vtag{font-weight:700}
   .ldetail .vtag.open{color:var(--green-deep)}
@@ -227,18 +230,22 @@
   .cta-scrim{position:fixed;left:0;right:0;bottom:0;height:150px;z-index:25;pointer-events:none;background:linear-gradient(to top,var(--paper) 0%,var(--paper) 42%,transparent 100%)}
 
   .controls{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;width:min(480px,calc(100% - 40px));z-index:30;display:flex;gap:11px}
-  .ctrl{flex:1;border:none;border-radius:16px;padding:16px;font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
+  .ctrl{flex:1;border:none;border-radius:16px;padding:16px;font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s var(--ease)}
   .ctrl:active{transform:translateY(2px) scale(.99)}
   .ctrl svg{width:17px;height:17px}
   .ctrl.primary{flex:2;background:linear-gradient(180deg,#5c7b46,#385029);color:#fff6e9;box-shadow:0 12px 26px -10px rgba(45,75,35,.55)}
   .ctrl.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
 
-  .view{display:none;animation:rise .4s cubic-bezier(.2,.7,.2,1)}
+  .view{display:none;animation:rise .4s var(--ease)}
   .view.active{display:block}
   /* 套用 stagger 的頁面改由子元素依序入場，父層不再整體淡入（避免雙重淡入） */
   .view.stagger{animation:none}
   @keyframes rise{from{opacity:0}to{opacity:1}}
-  .stagger>*{opacity:0;animation:rise .5s cubic-bezier(.2,.7,.2,1) forwards}
+  /* 一塊塊元件帶微幅上浮依序進場 */
+  @keyframes riseUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .stagger>*{opacity:0;animation:riseUp .55s var(--ease) forwards}
+  /* 固定的 CTA／漸隱襯底不參與編排（避免位移影響固定定位）：直接顯示 */
+  .stagger>.startbtn,.stagger>.cta-scrim{opacity:1;transform:none;animation:none}
   .stagger>*:nth-child(1){animation-delay:.04s}
   .stagger>*:nth-child(2){animation-delay:.1s}
   .stagger>*:nth-child(3){animation-delay:.16s}
