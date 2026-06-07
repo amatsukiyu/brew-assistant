@@ -217,7 +217,7 @@
 
   .view{display:none;animation:rise .4s cubic-bezier(.2,.7,.2,1)}
   .view.active{display:block}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes rise{from{opacity:0}to{opacity:1}}
   .stagger>*{opacity:0;animation:rise .5s cubic-bezier(.2,.7,.2,1) forwards}
   .stagger>*:nth-child(1){animation-delay:.04s}
   .stagger>*:nth-child(2){animation-delay:.1s}
