@@ -82,6 +82,7 @@ function openPreview(id){
 function showView(v){
   document.querySelectorAll(".view").forEach(el=>el.classList.remove("active"));
   $("view-"+v).classList.add("active");
+  document.body.classList.toggle("has-cta",v!=="home"); // 非首頁＝有置底 CTA → 顯示漸隱襯底
   window.scrollTo({top:0,behavior:"instant"});
 }
 function goHome(){stopTimer();showView("home");$("backBtn").style.display="none";}
