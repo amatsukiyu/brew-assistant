@@ -250,7 +250,12 @@ function paintBrew(){
 
 function advanceCue(){
   const n=$("bw-now");
-  n.classList.remove("advance");void n.offsetWidth;n.classList.add("advance");
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  // Web Animations API：只在此元素上播放一次「從右滑入」，不碰 class、不重啟 stagger 的 riseUp
+  n.animate(
+    [{opacity:0,transform:"translateX(44px)"},{opacity:1,transform:"translateX(0)"}],
+    {duration:420,easing:"cubic-bezier(.22,1,.36,1)"}
+  );
 }
 let actx=null;
 function beep(){
