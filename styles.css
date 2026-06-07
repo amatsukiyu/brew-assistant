@@ -57,7 +57,7 @@
   .backbtn svg{width:14px;height:14px}
 
   /* ---------- Home ---------- */
-  .hero{margin:6px 0 26px;padding:2px}
+  .hero{margin:6px 0 40px;padding:2px}
   .hero h2{font-family:var(--serif-cn);font-weight:800;font-size:var(--t-display);line-height:1.1;margin:0 0 8px}
   .hero h2 b{font-weight:800;color:var(--amber);background:linear-gradient(90deg,var(--amber) 0%,var(--amber) 60%,var(--amber-deep) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .hero p{color:var(--ink-soft);font-size:var(--t-sm);line-height:1.7;max-width:90%}
@@ -66,6 +66,8 @@
   .section-h .num{font-family:var(--serif-en);font-weight:600;font-style:italic;color:var(--amber);font-size:var(--t-head)}
   .section-h h3{font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body)}
   .section-h .hint{margin-left:auto;font-size:var(--t-label);color:var(--ink-soft)}
+  /* 首頁留白節奏：標籤緊貼自己的內容（字級不變） */
+  #view-home .section-h{margin:36px 0 12px}
   /* 兩大區塊之間留更大的間距 */
   #goals + .section-h{margin-top:48px}
 
@@ -240,4 +242,4 @@
   .stagger>*:nth-child(5){animation-delay:.28s}
   .stagger>*:nth-child(6){animation-delay:.34s}
 
-  .footnote{text-align:center;font-size:var(--t-label);color:var(--ink-soft);margin:34px 0 10px;line-height:1.7;opacity:.85}
+  .footnote{text-align:center;font-size:var(--t-label);color:var(--ink-soft);margin:56px 0 10px;line-height:1.7;opacity:.85}
