@@ -87,14 +87,15 @@ function showView(v){
 function goHome(){stopTimer();showView("home");$("backBtn").style.display="none";}
 
 /* ===================== BREW LOGIC ===================== */
-let timer=null,elapsed=0,running=false,lastStepIdx=-1,brewMethod=null,expanded=new Set();
+let timer=null,elapsed=0,running=false,lastStepIdx=-1,brewMethod=null,expanded=new Set(),brewDone=false;
 
 function startBrew(){
   brewMethod=getMethod(currentId);
-  elapsed=0;running=false;lastStepIdx=-1;
+  elapsed=0;running=false;lastStepIdx=-1;brewDone=false;
   if(timer){clearInterval(timer);timer=null;}
   $("bw-name").textContent=brewMethod.name+" · "+brewMethod.sub;
   $("bw-total").textContent=fmt(brewMethod.total);
+  $("bw-toggle").classList.remove("done");
   $("bw-togglelabel").textContent="開始計時";
   $("bw-toggle").querySelector("svg").innerHTML='<polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none"/>';
   expanded=new Set();
@@ -164,7 +165,16 @@ function currentStepIdx(){
 }
 
 function toggleTimer(){
+  if(brewDone){goHome();return;}
   if(running){pauseTimer();}else{playTimer();}
+}
+function finishBrew(){
+  brewDone=true;
+  stopTimer();
+  const btn=$("bw-toggle");
+  btn.classList.add("done");
+  $("bw-togglelabel").textContent="沖煮完成";
+  btn.querySelector("svg").innerHTML='<path d="M20 6L9 17l-5-5"/>';
 }
 function playTimer(){
   running=true;
@@ -202,6 +212,7 @@ function paintBrew(){
     $("bw-steplabel").textContent="沖煮完成";
     cd.classList.add("done");
     if(!cd.querySelector(".cup"))cd.innerHTML=COFFEE_ICON+STEAM_SVG;
+    if(!brewDone)finishBrew();
   }else{
     $("bw-stepnum").textContent=idx+1;
     $("bw-steplabel").textContent=cur.label;
