@@ -46,6 +46,11 @@
   }
   .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 20px 120px;min-height:100%}
 
+  /* 選取文字：暖琥珀色（取代瀏覽器預設藍） */
+  ::selection{background:#ecd0a3;color:var(--ink)}
+  /* 鍵盤焦點環：只在鍵盤操作時顯示，滑鼠／觸控不受影響 */
+  .goal:focus-visible,.backbtn:focus-visible,.startbtn:focus-visible,.ctrl:focus-visible,.lhead:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
   /* ---------- Top bar ---------- */
   .topbar{display:flex;align-items:center;justify-content:space-between;padding:26px 2px 18px}
   .brand{display:flex;align-items:center;gap:11px}
@@ -231,6 +236,8 @@
 
   .view{display:none;animation:rise .4s cubic-bezier(.2,.7,.2,1)}
   .view.active{display:block}
+  /* 套用 stagger 的頁面改由子元素依序入場，父層不再整體淡入（避免雙重淡入） */
+  .view.stagger{animation:none}
   @keyframes rise{from{opacity:0}to{opacity:1}}
   .stagger>*{opacity:0;animation:rise .5s cubic-bezier(.2,.7,.2,1) forwards}
   .stagger>*:nth-child(1){animation-delay:.04s}
@@ -239,5 +246,11 @@
   .stagger>*:nth-child(4){animation-delay:.22s}
   .stagger>*:nth-child(5){animation-delay:.28s}
   .stagger>*:nth-child(6){animation-delay:.34s}
+  /* 減少動畫偏好：補上 flash／頁面進場／stagger 的關閉 */
+  @media (prefers-reduced-motion:reduce){
+    .now.flash{animation:none}
+    .view{animation:none}
+    .stagger>*{animation:none;opacity:1}
+  }
 
   .footnote{text-align:center;font-size:var(--t-label);color:var(--ink-soft);margin:56px 0 10px;line-height:1.7;opacity:.85}
