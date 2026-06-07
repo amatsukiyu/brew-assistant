@@ -166,9 +166,17 @@
   .nx-cd{font-family:var(--serif-en);font-weight:600;font-size:var(--t-timer);line-height:.92;color:var(--amber);font-variant-numeric:tabular-nums;margin-top:28px}
   .nx-cd.urgent{color:#c0392b}
   .nx-cd.done{color:var(--green-deep)}
+  .nx-cd.done{position:relative;overflow:visible}
   .nx-cd .cup{display:block;width:64px;height:64px;margin-top:-2px;animation:cupIn .5s ease-out both}
+  .nx-cd.done .cup{margin-top:2px}
   @keyframes cupIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
   @media (prefers-reduced-motion:reduce){.nx-cd .cup{animation:none}}
+  .steamfx{position:absolute;left:30px;top:-12px;transform:translateX(-50%);width:42px;height:16px;pointer-events:none;z-index:2;overflow:visible}
+  .steamfx path{fill:none;stroke:#b98a59;stroke-width:3.5;stroke-linecap:round;stroke-dasharray:15;stroke-dashoffset:15;animation:steamDraw 3s ease-in-out infinite}
+  .steamfx path:nth-child(2){animation-delay:.1s}
+  .steamfx path:nth-child(3){animation-delay:.2s}
+  @keyframes steamDraw{0%{stroke-dashoffset:15;opacity:0}18%{opacity:.85}55%{stroke-dashoffset:0;opacity:.55}100%{stroke-dashoffset:-15;opacity:0}}
+  @media (prefers-reduced-motion:reduce){.steamfx{display:none}}
   .nx-block{flex:1;background:#f6ecda;border:1px solid var(--line);border-radius:14px;padding:4px 14px;display:flex;flex-direction:column;justify-content:center}
   .nx-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:11px 0}
   .nx-row+.nx-row{border-top:1px solid var(--line)}
@@ -200,7 +208,9 @@
   .lrow.open .chev{transform:rotate(90deg)}
   .lrow.passed .chev{display:none}
   .check2{width:15px;height:15px;color:var(--green);flex:0 0 15px;display:none}
-  .lrow.passed .check2{display:block}
+  .lrow.passed .check2{display:block;animation:checkIn .45s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes checkIn{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.lrow.passed .check2{animation:none}}
   .ldetail{max-height:0;opacity:0;overflow:hidden;transition:max-height .25s,opacity .25s,padding .25s;padding:0 14px;font-size:var(--t-label);color:var(--ink-soft);line-height:1.7}
   .lrow.open .ldetail{max-height:90px;opacity:1;padding:2px 14px 13px 65px}
   .ldetail b{color:var(--amber-deep);font-weight:700}
