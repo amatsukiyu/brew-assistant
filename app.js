@@ -241,16 +241,16 @@ function paintBrew(){
     const first=lastStepIdx;
     lastStepIdx=idx;
     updateListStates(idx,finished);
-    if(running&&(idx>0||elapsed>0.3)&&first!==-1){flashCue();beep();}
+    if(running&&(idx>0||elapsed>0.3)&&first!==-1){advanceCue();beep();}
   }else if(finished&&!$("bw-list").dataset.done){
     $("bw-list").dataset.done="1";
     updateListStates(idx,true);
   }
 }
 
-function flashCue(){
+function advanceCue(){
   const n=$("bw-now");
-  n.classList.remove("flash");void n.offsetWidth;n.classList.add("flash");
+  n.classList.remove("advance");void n.offsetWidth;n.classList.add("advance");
 }
 let actx=null;
 function beep(){
