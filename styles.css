@@ -27,6 +27,7 @@
     --t-timer:56px; /* 例外：計時頁倒數，刻意破格當主角 */
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scrollbar-gutter:stable}
   html,body{height:100%}
   body{
     font-family:var(--sans);
@@ -207,7 +208,7 @@
   .ldetail .vtag.open{color:var(--green-deep)}
   .ldetail .vtag.close{color:var(--brown)}
 
-  .controls{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;width:min(480px,calc(100% - 40px));z-index:30;display:flex;gap:11px}
+  .controls{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;width:min(480px,calc(100% - 40px));z-index:30;display:flex;gap:11px}
   .ctrl{flex:1;border:none;border-radius:16px;padding:16px;font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
   .ctrl:active{transform:translateY(2px) scale(.99)}
   .ctrl svg{width:17px;height:17px}
