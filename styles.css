@@ -85,7 +85,7 @@
   .card .chead{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .card h4{font-family:var(--serif-cn);font-weight:800;font-size:var(--t-head);letter-spacing:.3px;flex:1;min-width:0}
   .roast{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font-size:var(--t-label);font-weight:400;color:var(--ink-soft);white-space:nowrap}
-  .roast .bean{width:14px;height:14px;flex:0 0 auto}
+  .roast .bean{width:14px;height:14px;flex:0 0 auto;color:var(--amber)}
   .card .sub{font-family:var(--num);font-weight:700;font-style:italic;color:var(--amber-deep);font-size:var(--t-label);margin-top:2px}
   .card .hookrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
   .card .flavor{flex:1;min-width:0;font-size:var(--t-label);line-height:1.5;color:var(--ink-soft);font-weight:400}
