@@ -131,7 +131,7 @@
   .timeline{margin-top:10px;position:relative}
   .step{position:relative;display:flex;gap:14px;padding:14px 0}
   .step:not(:last-child)::before{content:"";position:absolute;left:14px;top:34px;bottom:-14px;width:2px;background:repeating-linear-gradient(var(--line) 0 5px,transparent 5px 10px)}
-  .step .bullet{flex:0 0 30px;height:30px;border-radius:50%;background:var(--card);border:1px solid var(--line);color:var(--amber-deep);display:flex;align-items:center;justify-content:center;font-family:var(--serif-en);font-weight:600;font-size:var(--t-sm);z-index:1}
+  .step .bullet{flex:0 0 30px;height:30px;border-radius:50%;background:var(--card);border:1px solid var(--line);color:var(--amber);display:flex;align-items:center;justify-content:center;font-family:var(--serif-en);font-weight:600;font-size:var(--t-sm);z-index:1}
   .step .sbody{flex:1;padding-top:1px}
   .step .stop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .step .slabel{font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body)}
