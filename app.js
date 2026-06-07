@@ -241,13 +241,18 @@ function paintBrew(){
     const first=lastStepIdx;
     lastStepIdx=idx;
     updateListStates(idx,finished);
-    if(running&&(idx>0||elapsed>0.3)&&first!==-1){beep();}
+    if(running&&(idx>0||elapsed>0.3)&&first!==-1){swapCue();beep();}
   }else if(finished&&!$("bw-list").dataset.done){
     $("bw-list").dataset.done="1";
     updateListStates(idx,true);
   }
 }
 
+// 換步驟：重新觸發卡內元件由上而下依序淡入（只影響 .now 的子元素，不動 #bw-now 自身的進場動畫）
+function swapCue(){
+  const n=$("bw-now");
+  n.classList.remove("swap");void n.offsetWidth;n.classList.add("swap");
+}
 let actx=null;
 function beep(){
   try{
