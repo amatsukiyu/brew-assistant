@@ -252,8 +252,9 @@ function advanceCue(){
   const n=$("bw-now");
   if(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches)return;
   // Web Animations API：只在此元素上播放一次「從右滑入」，不碰 class、不重啟 stagger 的 riseUp
+  // 純 transform（不動 opacity）→ 完全在合成層運作、不觸發重繪，避免漣漪影響固定的 CTA／陰影
   n.animate(
-    [{opacity:0,transform:"translateX(44px)"},{opacity:1,transform:"translateX(0)"}],
+    [{transform:"translateX(40px)"},{transform:"translateX(0)"}],
     {duration:420,easing:"cubic-bezier(.22,1,.36,1)"}
   );
 }
