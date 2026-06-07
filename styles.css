@@ -223,9 +223,8 @@
   .ldetail .vtag.open{color:var(--green-deep)}
   .ldetail .vtag.close{color:var(--brown)}
 
-  /* 置底 CTA 漸隱襯底：放在 .wrap 堆疊脈絡內、z-index 低於 CTA(30)，永遠在按鈕後方 */
-  .cta-scrim{position:fixed;left:0;right:0;bottom:0;height:150px;z-index:25;pointer-events:none;display:none;background:linear-gradient(to top,var(--paper) 0%,var(--paper) 42%,transparent 100%)}
-  body.has-cta .cta-scrim{display:block}
+  /* 置底 CTA 漸隱襯底：放在各 CTA view 內，與 CTA 共享堆疊脈絡（z-index 低於 CTA 的 30，永遠在按鈕後方、切頁時一起淡入不被蓋） */
+  .cta-scrim{position:fixed;left:0;right:0;bottom:0;height:150px;z-index:25;pointer-events:none;background:linear-gradient(to top,var(--paper) 0%,var(--paper) 42%,transparent 100%)}
 
   .controls{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;width:min(480px,calc(100% - 40px));z-index:30;display:flex;gap:11px}
   .ctrl{flex:1;border:none;border-radius:16px;padding:16px;font-family:var(--serif-cn);font-weight:700;font-size:var(--t-body);letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
